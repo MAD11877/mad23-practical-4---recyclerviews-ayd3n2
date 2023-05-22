@@ -135,9 +135,16 @@ public class ListActivity extends AppCompatActivity {
         public BrandsAdapter(ArrayList<User> input){
             data = input;
         }
+
+        @Override
+        public int getItemViewType(int position) { // our logic to decide what view to use
+            User u = data.get(position);
+            lastdigit = u.getId() % 10;
+            return lastdigit;
+        }
         public BrandViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
             View item;
-            if (lastdigit == 7){
+            if (viewType == 7){ // viewType is a value returned by getItemViewType above
                 item = LayoutInflater.from(parent.getContext()).inflate(
                         R.layout.digit7,
                         parent,
@@ -153,11 +160,29 @@ public class ListActivity extends AppCompatActivity {
 
         }
         public void onBindViewHolder(BrandViewHolder holder, int position){
+//            User u = data.get(position);
+//            holder.nametxt.setText(u.getName() + " " +  u.getId());
+//            holder.destxt.setText(u.getDescription());
+//            f = u.getFollowed();
+//            lastdigit = u.getId() % 10;
+
             User u = data.get(position);
-            holder.nametxt.setText(u.getName() + " " +  u.getId());
-            holder.destxt.setText(u.getDescription());
-            f = u.getFollowed();
-            lastdigit = u.getId() % 10;
+            switch (holder.getItemViewType()) {
+                case 7:
+                    BrandViewHolder viewHolder0 = (BrandViewHolder)holder;
+                    viewHolder0.nametxt.setText(u.getName() + " " +  u.getId());
+                    viewHolder0.destxt.setText(u.getDescription());
+                    f = u.getFollowed();
+                    break;
+
+                default:
+                    BrandViewHolder viewHolder2 = (BrandViewHolder)holder;
+                    viewHolder2.nametxt.setText(u.getName() + " " +  u.getId());
+                    viewHolder2.destxt.setText(u.getDescription());
+                    f = u.getFollowed();
+
+                    break;
+            }
         }
         public int getItemCount(){
             return data.size();
