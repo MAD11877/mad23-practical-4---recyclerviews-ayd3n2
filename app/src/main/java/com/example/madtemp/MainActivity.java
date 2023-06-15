@@ -18,15 +18,17 @@ public class MainActivity extends AppCompatActivity {
         Intent rec = getIntent();
         String name = rec.getStringExtra("name");
         String des = rec.getStringExtra("des");
-        String fn = rec.getStringExtra("fnum");
+        Boolean follow = rec.getBooleanExtra("fol",false);
         TextView txt = (TextView) findViewById(R.id.textView);
         txt.setText(name);
         TextView description = (TextView) findViewById(R.id.textView2);
         description.setText("Description: " + des);
         Button btn = (Button) findViewById(R.id.button);
-        if (fn == "0") {
+
+        if(follow == false){
             btn.setText("FOLLOW");
-        } else {
+        }
+        else{
             btn.setText("UNFOLLOW");
         }
 

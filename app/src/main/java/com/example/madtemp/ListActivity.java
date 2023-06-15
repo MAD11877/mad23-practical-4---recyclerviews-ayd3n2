@@ -30,11 +30,11 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        User person1 = new User("Ben","1231235451",1590762919,false);
+        User person1 = new User("Ben","1231235451",1590762919,true);
         User person2 = new User("John","1231235451",751273111,true);
         User person3 = new User("Pat","1231235451",291810079,true);
         User person4 = new User("Mandy","1231235451",888585057,true);
-        User person5 = new User("Sarah","1231235451",1101588044,false);
+        User person5 = new User("Sarah","1231235451",1101588044,true);
         User person6 = new User("Ren","1231235451",420942097,true);
         User person7 = new User("Dan","1231235451",345123945,false);
         User person8 = new User("Ethan","1231235451",321039443,false);
@@ -89,19 +89,14 @@ public class ListActivity extends AppCompatActivity {
             super(itemView);
             AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
             builder.setTitle("Profile");
-            builder.setMessage("MADness");
+            builder.setMessage("NameID");
             builder.setPositiveButton("View", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Bundle extras = new Bundle();
                     extras.putString("name",nametxt.getText().toString());
                     extras.putString("des",destxt.getText().toString());
-                    if (f==true){
-                        extras.putString("fnum","1");
-                    }
-                    else{
-                        extras.putString("fnum","0");
-                    }
+                    extras.putBoolean("fol",f);
                     Intent activityName = new Intent(ListActivity.this, MainActivity.class);
                     activityName.putExtras(extras);
                     startActivity(activityName);
